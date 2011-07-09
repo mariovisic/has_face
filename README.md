@@ -12,15 +12,18 @@ attachment type that correctly responds to a `path` method.
 ## Installation
 Add has_face to your Gemfile and then bundle
 
+``` ruby
     gem 'has_face'
 
 Once installed run the generator to create an initializer
 
+``` ruby
     rails g has_face:install
 
 Then open up `config/initializers/has_face.rb` and enter your face.com
 API details.
 
+``` ruby
     # config/initializers/has_face.rb
     HasFace.configure do |config|
       config.api_key    = 'your face.com API key'
@@ -31,6 +34,7 @@ API details.
 
 Simply add a validation to the image you want to ensure has faces:
 
+``` ruby
     class User < ActiveRecord::Base
       validates :avatar, :has_face => true
     end
@@ -40,6 +44,7 @@ Simply add a validation to the image you want to ensure has faces:
 Error messages generated are i18n safe. To alter the error message shown
 add this to your `config/locale/en.yml`
 
+``` ruby
     en:
       activerecord:
         errors:
@@ -52,6 +57,7 @@ Face validations can be turned off for testing by setting the
 `enable_validation` config value to false, this is usally best done in
 your test config.
 
+``` ruby
     HasFace.enable_validation = false
 
 ### Contributing
