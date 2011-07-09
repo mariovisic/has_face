@@ -7,13 +7,14 @@ Gem::Specification.new do |s|
   s.version     = HasFace::VERSION
   s.authors     = ["Mario Visic"]
   s.email       = ["mario@mariovisic.com"]
-  s.homepage    = ""
-  s.summary     = "An Active Model validator that uses the face.com API to ensures an image contains a face"
+  s.homepage    = "https://github.com/mariovisic/has_face"
+  s.summary     = "Easily validate if an image contains faces"
   s.description = "An Active Model validator that uses the face.com API to ensures an image contains a face"
 
   s.rubyforge_project = "has_face"
 
   s.add_dependency 'activemodel', '>= 3.0'
+  s.add_dependency 'rest-client'
 
   s.add_development_dependency 'rspec',        '>= 2.0'
   s.add_development_dependency 'rr',           '>= 1.0'
