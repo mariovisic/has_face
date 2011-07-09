@@ -13,13 +13,13 @@ attachment type that correctly responds to a `path` method.
 Add has_face to your Gemfile and then bundle
 
 ``` ruby
-gem 'has_face'
+  gem 'has_face'
 ```
 
 Once installed run the generator to create an initializer
 
 ``` ruby
-rails g has_face:install
+  rails g has_face:install
 ```
 
 Then open up `config/initializers/has_face.rb` and enter your face.com
@@ -27,10 +27,10 @@ API details.
 
 ``` ruby
 # config/initializers/has_face.rb
-HasFace.configure do |config|
-  config.api_key    = 'your face.com API key'
-  config.api_secret = 'your face.com API secret'
-end
+  HasFace.configure do |config|
+    config.api_key    = 'your face.com API key'
+    config.api_secret = 'your face.com API secret'
+  end
 ```
 
 ## Usage
@@ -38,9 +38,9 @@ end
 Simply add a validation to the image you want to ensure has faces:
 
 ``` ruby
-class User < ActiveRecord::Base
-  validates :avatar, :has_face => true
-end
+  class User < ActiveRecord::Base
+    validates :avatar, :has_face => true
+  end
 ```
 
 ## i18n
@@ -49,11 +49,11 @@ Error messages generated are i18n safe. To alter the error message shown
 add this to your `config/locale/en.yml`
 
 ``` ruby
-en:
-  activerecord:
-    errors:
-      messages:
-        no_face: "We couldn't see a face in your photo, try taking another one."
+  en:
+    activerecord:
+      errors:
+        messages:
+          no_face: "We couldn't see a face in your photo, try taking another one."
 ```
 
 ## Skipping face validations for testing
@@ -63,7 +63,7 @@ Face validations can be turned off for testing by setting the
 your test config.
 
 ``` ruby
-HasFace.enable_validation = false
+  HasFace.enable_validation = false
 ```
 
 ### Contributing
