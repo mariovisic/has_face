@@ -8,7 +8,7 @@ ActiveRecord::Schema.define(:version => 1) do
     t.integer  :user_id
   end
 
-  create_table :users, :force => true do |t|
+  create_table :base_users, :force => true do |t|
     t.string   :full_name
   end
 

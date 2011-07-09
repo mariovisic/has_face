@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe HasFace::Validator do
 
-  let(:user)   { UserWithFaceValidation.new(:avatar => avatar) }
+  let(:user)   { User.new(:avatar => avatar) }
   let(:avatar) { Avatar.new }
 
   context 'when validation is globally turned on' do
@@ -51,6 +51,38 @@ describe HasFace::Validator do
 
     it 'should be valid' do
       user.should be_valid
+    end
+
+  end
+
+  context 'allowing blank' do
+
+    context 'when allow blank is true' do
+
+      class UserWithAllowBlank < BaseUser
+        validates :avatar, :has_face => true, :allow_blank => true
+      end
+
+      let(:user) { UserWithAllowBlank.new }
+
+      it 'should be valid with a blank avatar' do
+        user.should be_valid
+      end
+
+    end
+
+    context 'when allow blank is not true' do
+
+      class UserWithoutAllowBlank < BaseUser
+        validates :avatar, :has_face => true, :allow_blank => false
+      end
+
+      let(:user) { UserWithoutAllowBlank.new }
+
+      it 'should not be valid' do
+        user.should_not be_valid
+      end
+
     end
 
   end

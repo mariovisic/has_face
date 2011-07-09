@@ -1,7 +1,7 @@
-class User < ActiveRecord::Base
+class User < BaseUser
 
-  has_one :avatar
+  validates :avatar, :has_face => true
 
 end
 
-class UserWithoutFaceValidation < User; end
+class UserWithFaceValidation < User; end

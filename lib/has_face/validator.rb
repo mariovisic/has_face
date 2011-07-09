@@ -3,30 +3,41 @@ require 'net/http'
 module HasFace
   class Validator < ActiveModel::EachValidator
 
+    def initialize(options)
+      @allow_nil, @allow_blank = options.delete(:allow_nil), options.delete(:allow_blank)
+      super
+    end
+
     def validate_each(record, attr_name, value)
 
-      image_url = record.send(attr_name).try(:url)
+      # Skip validation if globally turned off
+      return if HasFace.enable_validation == false
 
-      if image_url.present? && HasFace.enable_validation
+      image     = record.send(attr_name)
+      image_url = image.try(:url)
 
-        # Params and URL Setup
-        params       = { :api_key => HasFace.api_key, :api_secret => HasFace.api_secret, :urls => [HasFace.hostname, image_url].join }
-        uri_string   = get_uri_string(params)
-        url          = URI.parse(uri_string)
+      # Skip validation if our image is nil/blank and allow nil/blank is on
+      return if (@allow_nil && image.nil?) || (@allow_blank && image.blank?)
 
-        # Get our request and response objects
-        request      = Net::HTTP::Get.new(uri_string)
-        response     = get_response(url.host, url.port, request)
+      # Add an error if the url is blank
+      record.errors.add(attr_name, :no_face) if image_url.blank?
 
-        # Turn the response into tags
-        face_results = JSON.parse(response.body)
-        tags         = face_results.try(:[], 'photos').try(:first).try(:[], 'tags') || []
+      # Params and URL Setup
+      params       = { :api_key => HasFace.api_key, :api_secret => HasFace.api_secret, :urls => [HasFace.hostname, image_url].join }
+      uri_string   = get_uri_string(params)
+      url          = URI.parse(uri_string)
 
-        # Add errors if no tags are present
-        unless tags.present?
-          record.errors.add(attr_name, :no_face)
-        end
+      # Get our request and response objects
+      request      = Net::HTTP::Get.new(uri_string)
+      response     = get_response(url.host, url.port, request)
 
+      # Turn the response into tags
+      face_results = JSON.parse(response.body)
+      tags         = face_results.try(:[], 'photos').try(:first).try(:[], 'tags') || []
+
+      # Add errors if no tags are present
+      unless tags.present?
+        record.errors.add(attr_name, :no_face)
       end
 
     end
