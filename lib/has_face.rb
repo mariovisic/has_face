@@ -5,7 +5,13 @@ require "has_face/validator"
 module HasFace
 
   class << self
-    delegate :enable_validation, :enable_validation=, :hostname, :hostname=, :to => HasFace::Configuration
+
+    configs = [ :api_key, :api_secret,:enable_validation, :hostname, :detect_url]
+
+    configs.each do |config|
+      delegate config, "#{config}=", :to => HasFace::Configuration
+    end
+
   end
 
 end
