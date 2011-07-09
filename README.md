@@ -10,17 +10,16 @@ attachment type that correctly responds to a `path` method.
 - An account for accessing the face.com API (They are free at the moment)
 
 ## Installation
-Add has_face to your Gemfile and then run bundle
+Add has_face to your Gemfile and then bundle
 
     gem 'has_face'
 
-Once installed we need to add our face.com API details to an
-initializer. Either run the generator:
+Once installed run the generator to create an initializer
 
     rails g has_face:install
 
-This will create an initializer located at `config/initializers/has_face.rb`
-which you can edit. Or you can just copy the snippet blow:
+Then open up `config/initializers/has_face.rb` and enter your face.com
+API details.
 
     # config/initializers/has_face.rb
     HasFace.configure do |config|
@@ -35,6 +34,17 @@ Simply add a validation to the image you want to ensure has faces:
     class User < ActiveRecord::Base
       validates :avatar, :has_face => true
     end
+
+## i18n
+
+Error messages generated are i18n safe. To alter the error message shown
+add this to your `config/locale/en.yml`
+
+    en:
+      activerecord:
+        errors:
+          messages:
+            no_face: "We couldn't see a face in your photo, try taking another one."
 
 ## Skipping face validations for testing
 
