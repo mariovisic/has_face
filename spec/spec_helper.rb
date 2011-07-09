@@ -17,8 +17,8 @@ RSpec.configure do |config|
   config.before :all do
 
     # Put your api details here for tesing.
-    HasFace.api_key    = 'put your api key here for testing'
-    HasFace.api_secret = 'put your api secret here for testing'
+    HasFace.api_key    = 'put your api key here for testing'    if HasFace.api_key.blank?
+    HasFace.api_secret = 'put your api secret here for testing' if HasFace.api_secret.blank?
 
   end
 
