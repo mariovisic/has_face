@@ -16,6 +16,10 @@ module HasFace
       delegate config, "#{config}=", :to => HasFace::Configuration
     end
 
+    def configure
+      yield self
+    end
+
   end
 
 end
