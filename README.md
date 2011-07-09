@@ -14,11 +14,13 @@ Add has_face to your Gemfile and then bundle
 
 ``` ruby
     gem 'has_face'
+```
 
 Once installed run the generator to create an initializer
 
 ``` ruby
     rails g has_face:install
+```
 
 Then open up `config/initializers/has_face.rb` and enter your face.com
 API details.
@@ -29,6 +31,7 @@ API details.
       config.api_key    = 'your face.com API key'
       config.api_secret = 'your face.com API secret'
     end
+```
 
 ## Usage
 
@@ -38,6 +41,7 @@ Simply add a validation to the image you want to ensure has faces:
     class User < ActiveRecord::Base
       validates :avatar, :has_face => true
     end
+```
 
 ## i18n
 
@@ -50,6 +54,7 @@ add this to your `config/locale/en.yml`
         errors:
           messages:
             no_face: "We couldn't see a face in your photo, try taking another one."
+```
 
 ## Skipping face validations for testing
 
@@ -59,6 +64,7 @@ your test config.
 
 ``` ruby
     HasFace.enable_validation = false
+```
 
 ### Contributing
 
