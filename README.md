@@ -1,9 +1,9 @@
 # Has face
-A validator for active model to detect the presence of faces in image by
+An Active model validator to validate that images contain faces by
 using the face.com API. The validator works by uploading images to
 face.com and then checking to see if any faces were tagged in the photo.
 It has been tested with carrierwave attachments but will work with any
-attachment type that responds to a 'path' method.
+attachment type that correctly responds to a `path` method.
 
 ## Requirements
 - Rails 3.0 or greater
