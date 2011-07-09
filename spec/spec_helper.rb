@@ -2,13 +2,12 @@ require 'rspec'
 
 require 'active_model'
 require 'active_model/validations'
-require 'remarkable/active_record'
+require 'active_record'
 
-Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+Dir["spec/support/**/*.rb"].each {|f| require f}
 
-RSpec.configure do |c|
+RSpec.configure do |config|
 
-  config.use_transactional_fixtures = true
-  c.mock_with :rr
+  config.mock_with :rr
 
 end
