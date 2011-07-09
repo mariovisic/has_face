@@ -31,7 +31,7 @@ describe HasFace::Validator do
 
       it 'should have an error on the image field' do
         user.valid?
-        user.errors[:avatar].should == "We couldn't see a face in your photo, try taking another one."
+        user.errors[:avatar].should == [ "We couldn't see a face in your photo, try taking another one." ]
       end
 
     end

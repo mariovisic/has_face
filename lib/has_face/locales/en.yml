@@ -1,0 +1,5 @@
+en:
+  activerecord:
+    errors:
+      messages:
+        no_face: "We couldn't see a face in your photo, try taking another one."
