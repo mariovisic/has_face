@@ -2,15 +2,15 @@ require 'spec_helper'
 
 describe HasFace::Validator do
 
-  let(:user)   { User.new }
-  let(:avatar) { user.avatar }
+  let(:user)   { UserWithFaceValidation.new(:avatar => avatar) }
+  let(:avatar) { Avatar.new }
 
   context 'when validation is globally turned on' do
 
     context 'when the image is a valid face' do
 
       before :each do
-        stub(avatar).url = VALID_IMAGE_URL
+        avatar.url = VALID_IMAGE_URL
       end
 
       it 'should be valid' do
@@ -22,7 +22,7 @@ describe HasFace::Validator do
     context 'when the image is not a valid face' do
 
       before :each do
-        stub(avatar).url = INVALID_IMAGE_URL
+        avatar.url = INVALID_IMAGE_URL
       end
 
       it 'should not be valid' do
@@ -42,7 +42,7 @@ describe HasFace::Validator do
 
     before :each do
       HasFace.enable_validation = false
-      stub(avatar).url = INVALID_IMAGE_URL
+      avatar.url = INVALID_IMAGE_URL
     end
 
     after :each do
