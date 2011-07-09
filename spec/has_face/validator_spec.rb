@@ -10,7 +10,7 @@ describe HasFace::Validator do
     context 'when the image is a valid face' do
 
       before :each do
-        avatar.url = VALID_IMAGE_URL
+        avatar.path = VALID_IMAGE_PATH
       end
 
       it 'should be valid' do
@@ -22,7 +22,7 @@ describe HasFace::Validator do
     context 'when the image is not a valid face' do
 
       before :each do
-        avatar.url = INVALID_IMAGE_URL
+        avatar.path = INVALID_IMAGE_PATH
       end
 
       it 'should not be valid' do
@@ -42,7 +42,7 @@ describe HasFace::Validator do
 
     before :each do
       HasFace.enable_validation = false
-      avatar.url = INVALID_IMAGE_URL
+      avatar.path = INVALID_IMAGE_PATH
     end
 
     after :each do

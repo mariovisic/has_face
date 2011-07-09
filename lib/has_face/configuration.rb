@@ -6,7 +6,6 @@ module HasFace
 
     class << self
       attr_accessor :enable_validation
-      attr_accessor :hostname
       attr_accessor :detect_url
       attr_accessor :api_key
       attr_accessor :api_secret

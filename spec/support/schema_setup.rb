@@ -5,6 +5,7 @@ ActiveRecord::Schema.define(:version => 1) do
 
   create_table :avatars, :force => true do |t|
     t.string   :url
+    t.string   :path
     t.integer  :user_id
   end
 
