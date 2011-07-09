@@ -14,7 +14,7 @@ module HasFace
       return if HasFace.enable_validation == false
 
       image     = record.send(attr_name)
-      image_url = image.try(:url)
+      image_url = image.try(:url) if image.respond_to?(:url)
 
       # Skip validation if our image is nil/blank and allow nil/blank is on
       return if (@allow_nil && image.nil?) || (@allow_blank && image.blank?)

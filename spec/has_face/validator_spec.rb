@@ -65,6 +65,10 @@ describe HasFace::Validator do
 
       let(:user) { UserWithAllowBlank.new }
 
+      before :each do
+        stub(user).avatar { "" }
+      end
+
       it 'should be valid with a blank avatar' do
         user.should be_valid
       end
@@ -78,6 +82,50 @@ describe HasFace::Validator do
       end
 
       let(:user) { UserWithoutAllowBlank.new }
+
+      before :each do
+        stub(user).avatar { "" }
+      end
+
+      it 'should not be valid' do
+        user.should_not be_valid
+      end
+
+    end
+
+  end
+
+  context 'allowing nil' do
+
+    context 'when allow nil is true' do
+
+      class UserWithAllowNil < BaseUser
+        validates :avatar, :has_face => true, :allow_nil => true
+      end
+
+      let(:user) { UserWithAllowNil.new }
+
+      before :each do
+        stub(user).avatar { nil }
+      end
+
+      it 'should be valid with a nil avatar' do
+        user.should be_valid
+      end
+
+    end
+
+    context 'when allow nil is not true' do
+
+      class UserWithoutAllowNil < BaseUser
+        validates :avatar, :has_face => true, :allow_nil => false
+      end
+
+      let(:user) { UserWithoutAllowNil.new }
+
+      before :each do
+        stub(user).avatar { nil }
+      end
 
       it 'should not be valid' do
         user.should_not be_valid
