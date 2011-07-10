@@ -83,7 +83,7 @@ Once included he matcher can be used:
     end
 ```
 
-Allow_blank and allow_nil options can also be passed to the matcher:
+The options `allow_blank` and `allow_nil` can also be passed to the matcher:
 
 ``` ruby
     it { should validate_has_face_for :avatar, :allow_blank => true }
