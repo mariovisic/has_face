@@ -76,7 +76,7 @@ errors and then take the appropriate action in your application like so:
     begin
       @user = User.create(params[:user])
     rescue HasFace::FaceAPIError, HasFace::HTTPRequestError => e
-      render :text => e.inspect
+      # Perform some sort of action.
     end
 
 If you would like to skip valdiation when a HTTP or API error occurs
