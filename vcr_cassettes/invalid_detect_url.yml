@@ -1,0 +1,41 @@
+--- 
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :post
+    uri: http://face.com:80/invalid/lookup/url
+    body: 
+    headers: 
+      accept: 
+      - "*/*; q=0.5, application/xml"
+      content-type: 
+      - multipart/form-data; boundary=104496
+      accept-encoding: 
+      - gzip, deflate
+      content-length: 
+      - "69176"
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 404
+      message: Not Found
+    headers: 
+      content-type: 
+      - text/html; charset=iso-8859-1
+      server: 
+      - Apache/2.2.16 (Debian) mod_ssl/2.2.16 OpenSSL/0.9.8o
+      date: 
+      - Sun, 10 Jul 2011 14:43:50 GMT
+      content-length: 
+      - "261"
+      content-encoding: 
+      - gzip
+      vary: 
+      - Accept-Encoding
+    body: !binary |
+      H4sIAAAAAAAAA01QwWrDMAy95yu0nrbDrDSU0YExbE3KClkblvSw03BjjYQ5
+      cWY7Hfv7OSmFXQTvSe9JT/wmPWyq9yKDl+o1h+L4nO82sLhH3GXVFjGt0ksn
+      YTFitl+IiDe+04I3JFUAvvWaxCpewd542JqxVxwvZMRxHuIno34n3VL8mwko
+      4oOoGgJL3yM5TwqObzlg25+lbhVqY77GAUer4Uc66IP2c9KC6cE3rQNH9kyW
+      cRwmdxuKVMqSc+JpkHVDmLCELR/gNqVTK/s76Iz6cE5f+cNAfVnmGLNHtjZQ
+      znYgwxpZE6tNB4WxHtYxx6txyDSnCfdPX4j+AIuMg79AAQAA
+
+    http_version: "1.1"

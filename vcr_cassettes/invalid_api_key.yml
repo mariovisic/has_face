@@ -1,0 +1,38 @@
+--- 
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :post
+    uri: http://api.face.com:80/faces/detect.json
+    body: 
+    headers: 
+      accept: 
+      - "*/*; q=0.5, application/xml"
+      content-type: 
+      - multipart/form-data; boundary=666980
+      accept-encoding: 
+      - gzip, deflate
+      content-length: 
+      - "69159"
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 200
+      message: OK
+    headers: 
+      content-type: 
+      - "application/json; Charset: utf-8"
+      server: 
+      - Apache/2.2.16 (Debian) mod_ssl/2.2.16 OpenSSL/0.9.8o
+      date: 
+      - Sun, 10 Jul 2011 14:43:22 GMT
+      content-length: 
+      - "115"
+      content-encoding: 
+      - gzip
+      vary: 
+      - Accept-Encoding
+    body: !binary |
+      H4sIAAAAAAAAA6pWKi5JLCktVrJSSkvMzCktSlXSUUotKsovik/OT0lVsjIy
+      MIQJ5KYWFyemA8WUHAM8471dI+Nd/F2D4/38Q+JdIzyDQxR0FTLzyhJzMlMU
+      EgsyFbJTK5VqAQAAAP//AwApem9UYAAAAA==
+
+    http_version: "1.1"

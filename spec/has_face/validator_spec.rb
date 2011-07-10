@@ -14,7 +14,9 @@ describe HasFace::Validator do
       end
 
       it 'should be valid' do
-        user.should be_valid
+        VCR.use_cassette('valid image') do
+          user.should be_valid
+        end
       end
 
     end
@@ -26,12 +28,16 @@ describe HasFace::Validator do
       end
 
       it 'should not be valid' do
-        user.should_not be_valid
+        VCR.use_cassette('invalid image') do
+          user.should_not be_valid
+        end
       end
 
       it 'should have an error on the image field' do
-        user.valid?
-        user.errors[:avatar].should == [ "We couldn't see a face in your photo, try taking another one." ]
+        VCR.use_cassette('invalid image') do
+          user.valid?
+          user.errors[:avatar].should == [ "We couldn't see a face in your photo, try taking another one." ]
+        end
       end
 
     end
@@ -66,14 +72,18 @@ describe HasFace::Validator do
       end
 
       it 'should skip validation' do
-        user.should be_valid
+        VCR.use_cassette('invalid api key') do
+          user.should be_valid
+        end
       end
 
       it 'should log a warning' do
-        pending 'need to find a nice way to use the rails logger'
+        VCR.use_cassette('invalid api key') do
+          pending 'need to find a nice way to use the rails logger'
 
-        mock(Rails).logger.stub!.warn 'face.com API Error: "API_KEY_DOES_NOT_EXIST - invalid api key" Code: 201'
-        user.valid?
+          mock(Rails).logger.stub!.warn 'face.com API Error: "API_KEY_DOES_NOT_EXIST - invalid api key" Code: 201'
+          user.valid?
+        end
       end
 
     end
@@ -81,7 +91,9 @@ describe HasFace::Validator do
     context 'when skipping validation on errors is disabled' do
 
       it 'should raise an api error' do
-        expect { user.valid? }.to raise_error HasFace::FaceAPIError, 'face.com API Error: "API_KEY_DOES_NOT_EXIST - invalid api key" Code: 201'
+        VCR.use_cassette('invalid api key') do
+          expect { user.valid? }.to raise_error HasFace::FaceAPIError, 'face.com API Error: "API_KEY_DOES_NOT_EXIST - invalid api key" Code: 201'
+        end
       end
 
     end
@@ -102,14 +114,18 @@ describe HasFace::Validator do
       end
 
       it 'should skip validation' do
-        user.should be_valid
+        VCR.use_cassette('invalid detect url') do
+          user.should be_valid
+        end
       end
 
       it 'should log a warning' do
-        pending 'need to find a nice way to use the rails logger'
+        VCR.use_cassette('invalid detect url') do
+          pending 'need to find a nice way to use the rails logger'
 
-        mock(Rails).logger.stub!.warn 'has_face Request Error: some 404 error' 
-        user.valid?
+          mock(Rails).logger.stub!.warn 'has_face Request Error: some 404 error' 
+          user.valid?
+        end
       end
 
     end
@@ -117,7 +133,9 @@ describe HasFace::Validator do
     context 'when skipping validation on errors is disabled' do
 
       it 'should raise an api error' do
-        expect { user.valid? }.to raise_error HasFace::HTTPRequestError, 'has_face HTTP Request Error: "404 Resource Not Found"'
+        VCR.use_cassette('invalid detect url') do
+          expect { user.valid? }.to raise_error HasFace::HTTPRequestError, 'has_face HTTP Request Error: "404 Resource Not Found"'
+        end
       end
 
     end

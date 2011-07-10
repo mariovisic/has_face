@@ -16,8 +16,10 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails', '>= 3.0'
   s.add_dependency 'rest-client'
 
-  s.add_development_dependency 'rspec',        '>= 2.0'
-  s.add_development_dependency 'rr',           '>= 1.0'
+  s.add_development_dependency 'rspec',    '>= 2.0'
+  s.add_development_dependency 'rr',       '>= 1.0'
+  s.add_development_dependency 'vcr',      '>= 1.0'
+  s.add_development_dependency 'fakeweb',  '>= 1.0'
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

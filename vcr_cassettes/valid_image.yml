@@ -1,0 +1,49 @@
+--- 
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :post
+    uri: http://api.face.com:80/faces/detect.json
+    body: 
+    headers: 
+      accept: 
+      - "*/*; q=0.5, application/xml"
+      content-type: 
+      - multipart/form-data; boundary=591191
+      accept-encoding: 
+      - gzip, deflate
+      content-length: 
+      - "78189"
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 200
+      message: OK
+    headers: 
+      content-type: 
+      - "application/json; Charset: utf-8"
+      server: 
+      - Apache/2.2.16 (Debian) mod_ssl/2.2.16 OpenSSL/0.9.8o
+      date: 
+      - Sun, 10 Jul 2011 14:40:50 GMT
+      content-length: 
+      - "608"
+      content-encoding: 
+      - gzip
+      vary: 
+      - Accept-Encoding
+    body: !binary |
+      H4sIAAAAAAAAA6xTPY/cIBD9Kyva7GEwBn9UaZIiUqRISRefLBZjmwjbKwO5
+      u5z2v2ew13vaa9KkMsy8eW/eMH5F52H2s0PVz1cUFosqNHh/ruqkTjqpNFbz
+      WCfybB7C2c6ydXVS1EleJ7ROGCTqJFsjYj9nJG1FrrJSdCpvVSuEYqLEv866
+      R0d0Ni0ofP5Y8EyddNnmqcxPMqPtSVJxSqmCIi151qQUCjXhCkBF1xHFWakk
+      ka3ueKFYCVxPpvUDqkRGjmjQph88qrICLl72mx+/qv349PVb8x8kG15gnjZZ
+      holoSEOghUWruZ/MH3myGlV+CRrUh0W7YbYgPQVrjyiYNrbzeES9uQWtPOk4
+      bCBR89SZZdSQ66R1QDHKKUh7u4KfXi/NW/HVeSowKd+8swzncFV68npB1St6
+      RtXa8hG9wGRi25cj0i+6sbrzOwCKihXABKb8Clg2xhUhOOZiQ3CcpYAY5+CH
+      OxKB2UbCU5zfEHediBSzdMdwfgPdSYldilNcMsBMs9N7kmHBNisMF7FRuVyb
+      2KYS71e2LaAGM+3nF/kEBnIMDMtsYbYPKS7KuJBewSiL1YD0fjGn4LWLmnH9
+      4/e3tAEOKD7v/lytnmKyiH30emo3mztylPY9Mo+Oeyud28h36PrE77CcANaN
+      xpqp/xc2o5fL5fECy+W89AG4kQtKaecAGJzsVwvBxe2icWFHaaaVNytL8G/N
+      aHyUJCRmnfaNN6NuvH6GMPoepuOBksOXYA8pofRAecVIRfPDB6jYfoG9BgQY
+      JYzSguaXy18AAAD//wMArlodeVkEAAA=
+
+    http_version: "1.1"
