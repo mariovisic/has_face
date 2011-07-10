@@ -41,17 +41,67 @@ describe HasFace::Validator do
   context 'when face validation is globally turned off' do
 
     before :each do
-      HasFace.enable_validation = false
+      stub(HasFace).enable_validation { false }
       avatar.path = INVALID_IMAGE_PATH
-    end
-
-    after :each do
-      HasFace.enable_validation = true
     end
 
     it 'should be valid' do
       user.should be_valid
     end
+
+  end
+
+  context 'handling a failure response from the face.com API' do
+
+    before :each do
+      stub(HasFace).api_key { 'invalid api key' }
+      avatar.path = INVALID_IMAGE_PATH
+    end
+
+    context 'when skipping validation on errors is enabled' do
+
+      before :each do
+        stub(HasFace).skip_validation_on_error { true }
+        avatar.path = INVALID_IMAGE_PATH
+      end
+
+      it 'should skip validation' do
+        user.should be_valid
+      end
+
+      it 'should log a warning' do
+        pending 'need to find a nice way to use the rails logger'
+
+        mock(Rails).logger.stub!.warn 'face.com API Error: "API_KEY_DOES_NOT_EXIST - invalid api key" Code: 201'
+        user.valid?
+      end
+
+    end
+
+    context 'when skipping validation on errors is disabled' do
+
+      it 'should raise an api error' do
+        expect { user.valid? }.to raise_error HasFace::FaceAPIError, 'face.com API Error: "API_KEY_DOES_NOT_EXIST - invalid api key" Code: 201'
+      end
+
+    end
+
+  end
+
+  context 'handling http request errors' do
+
+    context 'when skipping validation on errors is enabled' do
+
+      before :each do
+        stub(HasFace).skip_validation_on_error { true }
+      end
+
+    end
+
+    context 'when skipping validation on errors is disabled' do
+
+    end
+
 
   end
 

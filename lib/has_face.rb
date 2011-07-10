@@ -1,8 +1,12 @@
 require "has_face/configuration"
-require "has_face/version"
 require "has_face/validator"
+require "has_face/version"
 
 module HasFace
+
+  # Error classes
+  class FaceAPIError < StandardError; end
+  class RequestError < StandardError; end
 
   # Add load paths straight to I18n, so engines and application can overwrite it.
   require 'i18n'
