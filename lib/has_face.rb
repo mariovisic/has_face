@@ -6,7 +6,7 @@ module HasFace
 
   # Error classes
   class FaceAPIError < StandardError; end
-  class RequestError < StandardError; end
+  class HTTPRequestError < StandardError; end
 
   # Add load paths straight to I18n, so engines and application can overwrite it.
   require 'i18n'

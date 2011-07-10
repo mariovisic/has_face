@@ -24,7 +24,13 @@ module HasFace
 
       # Get an parse the JSON response
       params   = { :api_key => HasFace.api_key, :api_secret => HasFace.api_secret, :image => File.new(image_path, 'rb') }
-      response = RestClient.post(HasFace.detect_url, params)
+
+      begin
+        response = RestClient.post(HasFace.detect_url, params)
+      rescue RestClient::Exception => error
+        return handle_request_error(error)
+      end
+
       json_response = JSON.parse(response.body)
 
       # Error handling for failed responses
@@ -42,14 +48,24 @@ module HasFace
     protected
 
     def handle_api_error(response)
-
-      api_error_message = "face.com API Error: \"#{response['error_message']}\" Code: #{response['error_code']}"
+      error_message = "face.com API Error: \"#{response['error_message']}\" Code: #{response['error_code']}"
 
       if HasFace.skip_validation_on_error
         # TODO: Create a warning for the rails logger
         true
       else
-        raise FaceAPIError.new api_error_message
+        raise FaceAPIError.new error_message
+      end
+    end
+
+    def handle_request_error(error)
+      error_message = "has_face HTTP Request Error: \"#{error.message}\""
+
+      if HasFace.skip_validation_on_error
+        # TODO: Create a warning for the rails logger
+        true
+      else
+        raise HTTPRequestError.new error_message
       end
     end
 

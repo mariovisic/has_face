@@ -90,18 +90,37 @@ describe HasFace::Validator do
 
   context 'handling http request errors' do
 
+    before :each do
+      stub(HasFace).detect_url { 'http://face.com/invalid/lookup/url' }
+      avatar.path = INVALID_IMAGE_PATH
+    end
+
     context 'when skipping validation on errors is enabled' do
 
       before :each do
         stub(HasFace).skip_validation_on_error { true }
       end
 
+      it 'should skip validation' do
+        user.should be_valid
+      end
+
+      it 'should log a warning' do
+        pending 'need to find a nice way to use the rails logger'
+
+        mock(Rails).logger.stub!.warn 'has_face Request Error: some 404 error' 
+        user.valid?
+      end
+
     end
 
     context 'when skipping validation on errors is disabled' do
 
-    end
+      it 'should raise an api error' do
+        expect { user.valid? }.to raise_error HasFace::HTTPRequestError, 'has_face HTTP Request Error: "404 Resource Not Found"'
+      end
 
+    end
 
   end
 
