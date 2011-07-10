@@ -28,8 +28,9 @@ API details.
 ``` ruby
 # config/initializers/has_face.rb
   HasFace.configure do |config|
-    config.api_key    = 'your face.com API key'
-    config.api_secret = 'your face.com API secret'
+    config.api_key                  = 'your face.com API key'
+    config.api_secret               = 'your face.com API secret'
+    config.skip_validation_on_error = false
   end
 ```
 

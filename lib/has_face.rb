@@ -10,7 +10,7 @@ module HasFace
 
   class << self
 
-    configs = [ :api_key, :api_secret, :enable_validation, :detect_url]
+    configs = [ :api_key, :api_secret, :enable_validation, :detect_url, :skip_validation_on_error ]
 
     configs.each do |config|
       delegate config, "#{config}=", :to => HasFace::Configuration
