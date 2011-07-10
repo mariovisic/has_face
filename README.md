@@ -44,6 +44,14 @@ Simply add a validation to the image you want to ensure has faces:
   end
 ```
 
+The `allow_nil` and `allow_blank` options are supported:
+
+``` ruby
+  class User < ActiveRecord::Base
+    validates :avatar, :has_face => true, :allow_blank => true
+  end
+```
+
 ## i18n
 
 Error messages generated are i18n safe. To alter the error message shown
