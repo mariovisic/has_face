@@ -59,8 +59,11 @@ describe HasFace::Validator do
 
   context 'handling a failure response from the face.com API' do
 
+    let(:logger) { Logger.new(nil) }
+
     before :each do
       stub(HasFace).api_key { 'invalid api key' }
+      stub(Rails).logger    { logger }
       avatar.path = INVALID_IMAGE_PATH
     end
 
@@ -79,9 +82,7 @@ describe HasFace::Validator do
 
       it 'should log a warning' do
         VCR.use_cassette('invalid api key') do
-          pending 'need to find a nice way to use the rails logger'
-
-          mock(Rails).logger.stub!.warn 'face.com API Error: "API_KEY_DOES_NOT_EXIST - invalid api key" Code: 201'
+          mock(logger).warn 'face.com API Error: "API_KEY_DOES_NOT_EXIST - invalid api key" Code: 201'
           user.valid?
         end
       end
@@ -102,8 +103,11 @@ describe HasFace::Validator do
 
   context 'handling http request errors' do
 
+    let(:logger) { Logger.new(nil) }
+
     before :each do
       stub(HasFace).detect_url { 'http://face.com/invalid/lookup/url' }
+      stub(Rails).logger       { logger }
       avatar.path = INVALID_IMAGE_PATH
     end
 
@@ -121,9 +125,7 @@ describe HasFace::Validator do
 
       it 'should log a warning' do
         VCR.use_cassette('invalid detect url') do
-          pending 'need to find a nice way to use the rails logger'
-
-          mock(Rails).logger.stub!.warn 'has_face Request Error: some 404 error' 
+          mock(logger).warn 'has_face HTTP Request Error: "404 Resource Not Found"'
           user.valid?
         end
       end

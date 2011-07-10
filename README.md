@@ -89,6 +89,9 @@ HasFace.configure do |config|
 end
 ```
 
+If an error does occur then it will be logged as a warning in the log
+for your applications current environment.
+
 ## Testing has_face
 
 To speed up your test suite, you can disable face validations by setting the

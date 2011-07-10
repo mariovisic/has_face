@@ -51,7 +51,7 @@ module HasFace
       error_message = "face.com API Error: \"#{response['error_message']}\" Code: #{response['error_code']}"
 
       if HasFace.skip_validation_on_error
-        # TODO: Create a warning for the rails logger
+        Rails.logger.warn error_message if Rails.logger.present?
         true
       else
         raise FaceAPIError.new error_message
@@ -62,7 +62,7 @@ module HasFace
       error_message = "has_face HTTP Request Error: \"#{error.message}\""
 
       if HasFace.skip_validation_on_error
-        # TODO: Create a warning for the rails logger
+        Rails.logger.warn error_message if Rails.logger.present?
         true
       else
         raise HTTPRequestError.new error_message
