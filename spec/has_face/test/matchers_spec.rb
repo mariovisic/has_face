@@ -18,4 +18,22 @@ describe HasFace::Test::Matchers do
 
   end
 
+  context 'a user with face validation and allow blank' do
+
+    subject { UserWithAllowBlank.new }
+
+    it { should validate_has_face_for     :avatar, :allow_blank => true }
+    it { should_not validate_has_face_for :avatar, :allow_blank => false }
+
+  end
+
+  context 'a user with face validation and allow nil' do
+
+    subject { UserWithAllowNil.new }
+
+    it { should validate_has_face_for     :avatar, :allow_nil => true }
+    it { should_not validate_has_face_for :avatar, :allow_nil => false }
+
+  end
+
 end

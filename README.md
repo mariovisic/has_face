@@ -57,14 +57,36 @@ add this to your `config/locale/en.yml`
           no_face: "We couldn't see a face in your photo, try taking another one."
 ```
 
-## Skipping face validations for testing
+## Testing has_face
 
-Face validations can be turned off for testing by setting the
+To speed up your test suite, you can disable face validations by setting the
 `enable_validation` config value to false, this is usally best done in
 your test config.
 
 ``` ruby
   HasFace.enable_validation = false
+```
+
+Has Face supplies a matcher which you can use in your tests, to
+enable it, include the matchers module in your rspec config.
+
+RSpec.configure do |config|
+  config.include HasFace::Test::Matchers
+end
+
+
+Once included he matcher can be used:
+
+``` ruby
+    context 'validations' do
+      it { should validate_has_face_for :avatar }
+    end
+```
+
+Allow_blank and allow_nil options can also be passed to the matcher:
+
+``` ruby
+    it { should validate_has_face_for :avatar, :allow_blank => true }
 ```
 
 ### Contributing
