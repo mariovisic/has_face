@@ -13,7 +13,7 @@ VALID_IMAGE_PATH   = 'spec/support/assets/hit.jpg'
 INVALID_IMAGE_PATH = 'spec/support/assets/miss.jpg'
 
 VCR.config do |c|
-  c.cassette_library_dir = 'vcr_cassettes'
+  c.cassette_library_dir = 'spec/support/vcr_cassettes'
   c.stub_with :fakeweb
   c.default_cassette_options = { :record => :once }
 end
