@@ -5,3 +5,5 @@ class User < BaseUser
 end
 
 class UserWithFaceValidation < User; end
+class UserWithoutAllowBlank < User; end
+class UserWithoutAllowNil < User; end

@@ -128,10 +128,6 @@ describe HasFace::Validator do
 
     context 'when allow blank is true' do
 
-      class UserWithAllowBlank < BaseUser
-        validates :avatar, :has_face => true, :allow_blank => true
-      end
-
       let(:user) { UserWithAllowBlank.new }
 
       before :each do
@@ -145,10 +141,6 @@ describe HasFace::Validator do
     end
 
     context 'when allow blank is not true' do
-
-      class UserWithoutAllowBlank < BaseUser
-        validates :avatar, :has_face => true, :allow_blank => false
-      end
 
       let(:user) { UserWithoutAllowBlank.new }
 
@@ -168,10 +160,6 @@ describe HasFace::Validator do
 
     context 'when allow nil is true' do
 
-      class UserWithAllowNil < BaseUser
-        validates :avatar, :has_face => true, :allow_nil => true
-      end
-
       let(:user) { UserWithAllowNil.new }
 
       before :each do
@@ -185,10 +173,6 @@ describe HasFace::Validator do
     end
 
     context 'when allow nil is not true' do
-
-      class UserWithoutAllowNil < BaseUser
-        validates :avatar, :has_face => true, :allow_nil => false
-      end
 
       let(:user) { UserWithoutAllowNil.new }
 

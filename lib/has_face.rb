@@ -1,6 +1,7 @@
-require "has_face/configuration"
-require "has_face/validator"
-require "has_face/version"
+require 'has_face/configuration'
+require 'has_face/validator'
+require 'has_face/version'
+require 'has_face/test/matchers'
 
 module HasFace
 

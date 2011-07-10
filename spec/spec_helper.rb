@@ -15,6 +15,8 @@ RSpec.configure do |config|
 
   config.mock_with :rr
 
+  config.include HasFace::Test::Matchers
+
   config.before :all do
 
     # Put your api details here for tesing.
