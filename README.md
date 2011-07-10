@@ -126,8 +126,4 @@ it { should validate_has_face_for :avatar, :allow_blank => true }
 ### Contributing
 
 Fork on GitHub and after you’ve committed tested patches, send a pull request.
-
 To get tests running simply run `bundle install` and then `rspec spec`
-
-For the tests to pass you'll need to enter a valid API key and
-secret into the spec helper.
