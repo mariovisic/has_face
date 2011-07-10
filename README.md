@@ -65,6 +65,29 @@ add this to your `config/locale/en.yml`
           no_face: "We couldn't see a face in your photo, try taking another one."
 ```
 
+
+## Error Handling
+
+By default has_face will raise either a `HasFace::FaceAPIError` or
+`HasFace::HTTPRequestError` on failure. You will need to catch these
+errors and then take the appropriate action in your application like so:
+
+``` ruby
+    begin
+      @user = User.create(params[:user])
+    rescue HasFace::FaceAPIError, HasFace::HTTPRequestError => e
+      render :text => e.inspect
+    end
+
+If you would like to skip valdiation when a HTTP or API error occurs
+then simply turn on the `skip_validation_on_error` configuration option:
+
+``` ruby
+  HasFace.configure do |config|
+    config.skip_validation_on_error = true
+  end
+```
+
 ## Testing has_face
 
 To speed up your test suite, you can disable face validations by setting the
