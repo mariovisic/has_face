@@ -36,12 +36,10 @@ module HasFace
       # Error handling for failed responses
       return handle_api_error(json_response) unless json_response['status'] == 'success'
 
-      tags = json_response.try(:[], 'photos').try(:first).try(:[], 'tags') || []
 
       # Add errors if no tags are present
-      unless tags.present?
-        record.errors.add(attr_name, :no_face)
-      end
+      tags = json_response.try(:[], 'photos').try(:first).try(:[], 'tags') || []
+      record.errors.add(attr_name, :no_face) if tags.blank?
 
     end
 
