@@ -126,6 +126,11 @@ The options `allow_blank` and `allow_nil` can also be passed to the matcher:
 it { should validate_has_face_for :avatar, :allow_blank => true }
 ```
 
+### License
+
+Has face is distributed under a standard MIT license, see LICENSE for
+further information.
+
 ### Contributing
 
 Fork on GitHub and after you’ve committed tested patches, send a pull request.
