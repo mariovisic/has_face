@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'rest-client'
 
   s.add_development_dependency 'rspec',    '>= 2.0'
+  s.add_development_dependency 'sqlite3',  '>= 1.0'
   s.add_development_dependency 'rr',       '>= 1.0'
   s.add_development_dependency 'vcr',      '>= 1.0'
   s.add_development_dependency 'fakeweb',  '>= 1.0'

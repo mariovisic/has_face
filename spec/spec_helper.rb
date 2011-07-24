@@ -5,9 +5,9 @@ require 'rails'
 require 'active_model'
 require 'active_model/validations'
 require 'active_record'
-require 'lib/has_face'
+require './lib/has_face'
 
-Dir["spec/support/**/*.rb"].each {|f| require f}
+Dir["spec/support/**/*.rb"].each {|f| require "./#{f}"}
 
 VALID_IMAGE_PATH   = 'spec/support/assets/hit.jpg'
 INVALID_IMAGE_PATH = 'spec/support/assets/miss.jpg'
