@@ -44,7 +44,7 @@ module HasFace
     end
 
     def handle_api_error(response)
-      error_message = "face.com API Error: \"#{response['error_message']}\" Code: #{response['error_code']}"
+      error_message = %{face.com API Error: "#{response['error_message']}" Code: #{response['error_code']}}
 
       if HasFace.skip_validation_on_error
         Rails.logger.warn error_message if Rails.logger.present?
@@ -55,7 +55,7 @@ module HasFace
     end
 
     def handle_request_error(error)
-      error_message = "has_face HTTP Request Error: \"#{error.message}\""
+      error_message = %{has_face HTTP Request Error: "#{error.message}"}
 
       if HasFace.skip_validation_on_error
         Rails.logger.warn error_message if Rails.logger.present?
