@@ -33,7 +33,7 @@ module HasFace
       tags = response.try(:[], 'photos').try(:first).try(:[], 'tags')
       record.errors.add(attr_name, :no_face) if tags.blank?
 
-    rescue RestClient::Exception => error
+    rescue Errno::ECONNREFUSED, Errno::ETIMEDOUT, RestClient::Exception => error
       return handle_request_error(error)
     end
 
