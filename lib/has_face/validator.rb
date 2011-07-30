@@ -1,4 +1,5 @@
 require 'rest_client'
+require 'action_controller'
 
 module HasFace
   class Validator < ActiveModel::EachValidator
@@ -15,6 +16,7 @@ module HasFace
 
       image       = record.send(attr_name)
       @image_path = image.respond_to?(:path) ? image.path : nil
+      @image_url  = "#{ActionController::Base.asset_host}#{image.url if image.respond_to?(:url)}"
 
       # Skip validation if our image is nil/blank and allow nil/blank is on
       return if (@allow_nil && image.nil?) || (@allow_blank && image.blank?)
@@ -40,7 +42,11 @@ module HasFace
     protected
 
     def params
-      { :api_key => HasFace.api_key, :api_secret => HasFace.api_secret, :image => File.new(@image_path, 'r') }
+      if HasFace.transfer_method == :url
+        { :api_key => HasFace.api_key, :api_secret => HasFace.api_secret, :urls => @image_url }
+      else
+        { :api_key => HasFace.api_key, :api_secret => HasFace.api_secret, :image => File.new(@image_path, 'r') }
+      end
     end
 
     def handle_api_error(response)
