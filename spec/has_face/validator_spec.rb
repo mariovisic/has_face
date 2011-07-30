@@ -144,6 +144,55 @@ describe HasFace::Validator do
 
   end
 
+  context 'using the url transfer method' do
+
+    let(:hit_url)  { 'u/17429266/swoonme/test/hit.jpeg' }
+    let(:miss_url) { 'u/17429266/swoonme/test/miss.jpeg' }
+
+    before :each do
+      ActionController::Base.asset_host = 'http://dl.dropbox.com/'
+      stub(HasFace).transfer_method { :url }
+    end
+
+    context 'when the image is a valid face' do
+
+      before :each do
+        avatar.path = hit_url # Needs to have 'some' value
+        avatar.url  = hit_url
+      end
+
+      it 'should be valid' do
+        VCR.use_cassette('valid url transfer') do
+          user.should be_valid
+        end
+      end
+
+    end
+
+    context 'when the image is not a valid face' do
+
+      before :each do
+        avatar.path = miss_url # Needs to have 'some' value
+        avatar.url  = miss_url
+      end
+
+      it 'should not be valid' do
+        VCR.use_cassette('invalid url transfer') do
+          user.should_not be_valid
+        end
+      end
+
+      it 'should have an error on the image field' do
+        VCR.use_cassette('invalid url transfer') do
+          user.valid?
+          user.errors[:avatar].should == [ "We couldn't see a face in your photo, try taking another one." ]
+        end
+      end
+
+    end
+
+  end
+
   context 'allowing blank' do
 
     context 'when allow blank is true' do
