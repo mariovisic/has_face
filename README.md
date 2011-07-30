@@ -31,6 +31,7 @@ HasFace.configure do |config|
   config.api_key                  = 'your face.com API key'
   config.api_secret               = 'your face.com API secret'
   config.skip_validation_on_error = false
+  config.transfer_method          = :upload
 end
 ```
 
@@ -92,6 +93,26 @@ end
 If an error does occur then it will be logged as a warning in the log
 for your applications current environment.
 
+## Tranfer Methods
+
+The default behavior is to upload images to the face.com API. This
+allows images that are not publicly accessible to be validated as well,
+has_face also has the option to send the URL of the image to be
+validated instead of uploading the data, to use url transering simply
+set the configuration option:
+
+``` ruby
+HasFace.configure do |config|
+  config.transfer_method = :url
+end
+```
+
+You will also need to set the `ActionController::Base.asset_host` to the
+base URL your images are accessible at. This can be done in your
+`environment.rb` or the environment for your specific environment, eg
+`production.rb` or `staging.rb`.
+
+
 ## Testing has_face
 
 To speed up your test suite, you can disable face validations by setting the
@@ -110,7 +131,6 @@ RSpec.configure do |config|
   config.include HasFace::Test::Matchers
 end
 ```
-
 
 Once included he matcher can be used:
 
