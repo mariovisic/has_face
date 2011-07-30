@@ -93,7 +93,7 @@ end
 If an error does occur then it will be logged as a warning in the log
 for your applications current environment.
 
-## Tranfer Methods
+## Transfer Methods
 
 The default behavior is to upload images to the face.com API. This
 allows images that are not publicly accessible to be validated as well,
