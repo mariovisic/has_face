@@ -5,6 +5,9 @@ face.com and then checking to see if any faces were tagged in the photo.
 It has been tested with carrierwave attachments but will work with any
 attachment type that correctly responds to a `path` method.
 
+Has face is currently used in the [Swoonme iPhone application](http://swoonme.com/) to provide face
+validation for the API.
+
 ## Requirements
 - Rails 3.0 or greater
 - An account for accessing the face.com API (They are free at the moment)
