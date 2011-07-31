@@ -1,3 +1,5 @@
+require './spec/support/models/base_user'
+
 class User < BaseUser
 
   validates :avatar, :has_face => true
